@@ -17,7 +17,7 @@ c.	Pots and pans<br />
 d.	Oven lights<br />
 e.	Utensils<br />
 4.	Set up steam VR<br />
-5.	Set up ray casting<br />
+5.	Set up ray casting  
 •	Summary of work that will be done in the next week<br />
 	Finish up cutting script<br />
 	Create Gustavo Model<br />
