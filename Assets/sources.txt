@@ -1,2 +1,3 @@
+https://assetstore.unity.com/packages/tools/integration/steamvr-plugin-32647
 https://assetstore.unity.com/packages/3d/props/food-and-kitchen-props-pack-85050
 https://assetstore.unity.com/packages/3d/environments/kitchen-creation-kit-2854
