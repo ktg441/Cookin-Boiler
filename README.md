@@ -2,7 +2,7 @@
 A Unity VR Game
 # Week 1 Progress
 Project name
-Cookin’ Gustavo
+Cookin’ Gustavo <br />
 List of mechanics with features completed, and still in progress
 Scene is in progress
 Ray casting is set up, the lights are set up
