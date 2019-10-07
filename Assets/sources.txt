@@ -3,3 +3,5 @@ https://assetstore.unity.com/packages/3d/props/food-and-kitchen-props-pack-85050
 https://assetstore.unity.com/packages/3d/environments/kitchen-creation-kit-2854
 https://assetstore.unity.com/packages/2d/textures-materials/floors/20-man-made-ground-materials-12835
 https://assetstore.unity.com/packages/3d/props/electronics/wall-tvset-8468
+https://assetstore.unity.com/packages/2d/textures-materials/brick/tileable-bricks-wall-24530
+https://assetstore.unity.com/packages/2d/textures-materials/wood/stylized-wood-texture-153499
