@@ -6,6 +6,10 @@ TagManager:
   tags:
   - SF_Door
   - Utensil
+  - Before Game
+  - During Game
+  - During_Game
+  - Before_Game
   layers:
   - Default
   - TransparentFX
