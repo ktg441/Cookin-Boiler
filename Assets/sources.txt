@@ -1,3 +1,4 @@
+//Assets
 https://assetstore.unity.com/packages/tools/integration/steamvr-plugin-32647
 https://assetstore.unity.com/packages/3d/props/food-and-kitchen-props-pack-85050
 https://assetstore.unity.com/packages/3d/environments/kitchen-creation-kit-2854
@@ -8,4 +9,9 @@ https://assetstore.unity.com/packages/2d/textures-materials/wood/stylized-wood-t
 https://assetstore.unity.com/packages/3d/props/furniture/round-carpet-15171
 https://assetstore.unity.com/packages/3d/environments/sci-fi/sci-fi-door-21813
 https://assetstore.unity.com/packages/3d/props/barprops-137130
+
 https://www.toptal.com/designers/subtlepatterns/page/7/
+
+//Tutorials
+https://www.youtube.com/watch?v=HnzmnSqE-Bc
+https://www.youtube.com/watch?v=ryfUXr5yvKw
