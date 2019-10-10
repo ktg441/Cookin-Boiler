@@ -1,0 +1,16 @@
+{
+  "source": "Unity",
+  "applications": [
+    {
+      "app_key": "application.generated.unity.cookingustavo.exe",
+      "launch_type": "url",
+      "url": "steam://launch/",
+      "action_manifest_path": "W:\\CS 390\\Final Project\\Cookin-Gustavo\\actions.json",
+      "strings": {
+        "en_us": {
+          "name": "Cookin' Gustavo [Testing]"
+        }
+      }
+    }
+  ]
+}
