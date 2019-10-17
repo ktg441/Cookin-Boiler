@@ -40,18 +40,52 @@ public class Hand : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.gameObject.CompareTag("Utensil"))
+        if (!other.gameObject.CompareTag("Utensil") && !other.gameObject.CompareTag("Rack"))
             return;
 
-        m_ContactInteractables.Add(other.gameObject.GetComponent<Interactable>());
+        if(other.name.Equals("knife-rack"))
+        {
+            GameObject.Find("User Knife").transform.eulerAngles = new Vector3(0f, -90f, 0);
+            m_ContactInteractables.Add(GameObject.Find("User Knife").GetComponent<Interactable>());
+        }
+        else if(other.name.Equals("spoon-rack"))
+        {
+            GameObject.Find("User Spoon").transform.eulerAngles = new Vector3(0f, 90f, 0);
+            m_ContactInteractables.Add(GameObject.Find("User Spoon").GetComponent<Interactable>());
+        }
+        else if(other.name.Equals("ladle-rack"))
+        {
+            GameObject.Find("User Ladle").transform.eulerAngles = new Vector3(0, 0, 0);
+            m_ContactInteractables.Add(GameObject.Find("User Ladle").GetComponent<Interactable>());
+        }
+        else
+        {
+            m_ContactInteractables.Add(other.gameObject.GetComponent<Interactable>());
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!other.gameObject.CompareTag("Utensil"))
+
+        if (!other.gameObject.CompareTag("Utensil") && !other.gameObject.CompareTag("Rack"))
             return;
 
-        m_ContactInteractables.Remove(other.gameObject.GetComponent<Interactable>());
+        if (other.name.Equals("knife-rack"))
+        {
+            m_ContactInteractables.Remove(GameObject.Find("User Knife").GetComponent<Interactable>());
+        }
+        else if (other.name.Equals("spoon-rack"))
+        {
+            m_ContactInteractables.Remove(GameObject.Find("User Spoon").GetComponent<Interactable>());
+        }
+        else if (other.name.Equals("ladle-rack"))
+        {
+            m_ContactInteractables.Remove(GameObject.Find("User Ladle").GetComponent<Interactable>());
+        }
+        else
+        {
+            m_ContactInteractables.Remove(other.gameObject.GetComponent<Interactable>());
+        }
     }
 
     public void Pickup()
@@ -69,6 +103,18 @@ public class Hand : MonoBehaviour
 
         //Position
         m_CurrentInteractable.transform.position = transform.position;
+        if (m_CurrentInteractable.name.Equals("User Knife"))
+        {
+
+        }
+        else if(m_CurrentInteractable.name.Equals("User Spoon"))
+        {
+
+        }
+        else if (m_CurrentInteractable.name.Equals("User Ladle"))
+        {
+            m_CurrentInteractable.transform.position = new Vector3(m_CurrentInteractable.transform.position.x, m_CurrentInteractable.transform.position.y - 0.15f, m_CurrentInteractable.transform.position.z + 0f);
+        }
 
         // Attach
         Rigidbody targetBody = m_CurrentInteractable.GetComponent<Rigidbody>();
