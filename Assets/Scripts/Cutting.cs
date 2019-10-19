@@ -4,21 +4,36 @@ using UnityEngine;
 
 public class Cutting : MonoBehaviour
 {
+
+    private int numCuts;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        numCuts = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        RaycastHit hit;
-        if(Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, 100))
-        {
-            //Hit colliders
-        }
         
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.name.Equals("User Knife"))
+        {
+            numCuts++;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        print(numCuts);
+        if (numCuts >= 5)
+        {
+            print("Fully cut");
+        }
     }
 
     void cutObject()

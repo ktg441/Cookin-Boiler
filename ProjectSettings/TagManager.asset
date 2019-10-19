@@ -9,6 +9,7 @@ TagManager:
   - During_Game
   - Before_Game
   - Rack
+  - Food
   layers:
   - Default
   - TransparentFX
