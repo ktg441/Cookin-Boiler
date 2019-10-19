@@ -13,11 +13,14 @@ public class Hand : MonoBehaviour
     private Interactable m_CurrentInteractable = null;
     public List<Interactable> m_ContactInteractables = new List<Interactable>(); //Make private when done testing. Make sure to add grip to hands
 
+    private bool handLock;
+
 
     private void Awake()
     {
         m_Pose = GetComponent<SteamVR_Behaviour_Pose>();
         m_Joint = GetComponent<FixedJoint>();
+        handLock = false;
     }
 
     // Update is called once per frame
@@ -45,18 +48,23 @@ public class Hand : MonoBehaviour
 
         if(other.name.Equals("knife-rack"))
         {
-            GameObject.Find("User Knife").transform.eulerAngles = new Vector3(0f, -90f, 0);
             m_ContactInteractables.Add(GameObject.Find("User Knife").GetComponent<Interactable>());
         }
         else if(other.name.Equals("spoon-rack"))
         {
-            GameObject.Find("User Spoon").transform.eulerAngles = new Vector3(0f, 90f, 0);
             m_ContactInteractables.Add(GameObject.Find("User Spoon").GetComponent<Interactable>());
         }
         else if(other.name.Equals("ladle-rack"))
         {
-            GameObject.Find("User Ladle").transform.eulerAngles = new Vector3(0, 0, 0);
             m_ContactInteractables.Add(GameObject.Find("User Ladle").GetComponent<Interactable>());
+        }
+        else if(other.name.Equals("wok-rack"))
+        {
+            m_ContactInteractables.Add(GameObject.Find("User Pan").GetComponent<Interactable>());
+        }
+        else if (other.name.Equals("pot-rack"))
+        {
+            m_ContactInteractables.Add(GameObject.Find("User Pot").GetComponent<Interactable>());
         }
         else
         {
@@ -82,6 +90,14 @@ public class Hand : MonoBehaviour
         {
             m_ContactInteractables.Remove(GameObject.Find("User Ladle").GetComponent<Interactable>());
         }
+        else if (other.name.Equals("wok-rack"))
+        {
+            m_ContactInteractables.Remove(GameObject.Find("User Pan").GetComponent<Interactable>());
+        }
+        else if (other.name.Equals("pot-rack"))
+        {
+            m_ContactInteractables.Remove(GameObject.Find("User Pot").GetComponent<Interactable>());
+        }
         else
         {
             m_ContactInteractables.Remove(other.gameObject.GetComponent<Interactable>());
@@ -103,18 +119,51 @@ public class Hand : MonoBehaviour
 
         //Position
         m_CurrentInteractable.transform.position = transform.position;
+
         if (m_CurrentInteractable.name.Equals("User Knife"))
         {
-
+            if (!handLock)
+            {
+                GameObject.Find("User Knife").transform.eulerAngles = new Vector3(0f, m_CurrentInteractable.transform.eulerAngles.y , m_CurrentInteractable.transform.eulerAngles.z);
+                handLock = true;
+            }
         }
         else if(m_CurrentInteractable.name.Equals("User Spoon"))
         {
+            if (!handLock)
+            {
+                GameObject.Find("User Spoon").transform.eulerAngles = new Vector3(m_CurrentInteractable.transform.eulerAngles.x, m_CurrentInteractable.transform.eulerAngles.y, 0f);
+                handLock = true;
+            }
 
         }
         else if (m_CurrentInteractable.name.Equals("User Ladle"))
         {
-            m_CurrentInteractable.transform.position = new Vector3(m_CurrentInteractable.transform.position.x, m_CurrentInteractable.transform.position.y - 0.15f, m_CurrentInteractable.transform.position.z + 0f);
+            if (!handLock)
+            {
+                GameObject.Find("User Ladle").transform.eulerAngles = new Vector3(0f, m_CurrentInteractable.transform.eulerAngles.y, m_CurrentInteractable.transform.eulerAngles.z);
+                //m_CurrentInteractable.transform.position = new Vector3(m_CurrentInteractable.transform.position.x, m_CurrentInteractable.transform.position.y - 0.15f, m_CurrentInteractable.transform.position.z + 0f);
+                handLock = true;
+            }
         }
+        else if (m_CurrentInteractable.name.Equals("User Pan"))
+        {
+            if (!handLock)
+            {
+                GameObject.Find("User Pan").transform.eulerAngles = new Vector3(-90f, m_CurrentInteractable.transform.eulerAngles.y, m_CurrentInteractable.transform.eulerAngles.z);
+                handLock = true;
+            }
+        }
+        else if (m_CurrentInteractable.name.Equals("User Pot"))
+        {
+            if (!handLock)
+            {
+                GameObject.Find("User Pot").transform.eulerAngles = new Vector3(-90f, m_CurrentInteractable.transform.eulerAngles.y, m_CurrentInteractable.transform.eulerAngles.z);
+                GameObject.Find("User Pot").transform.position = new Vector3(m_CurrentInteractable.transform.position.x , m_CurrentInteractable.transform.position.y - 0.05f, m_CurrentInteractable.transform.position.z);
+                handLock = true;
+            }
+        }
+
 
         // Attach
         Rigidbody targetBody = m_CurrentInteractable.GetComponent<Rigidbody>();
@@ -130,6 +179,7 @@ public class Hand : MonoBehaviour
         if (!m_CurrentInteractable)
             return;
 
+        handLock = false;
         //Apply velocity
         Rigidbody targetBody = m_CurrentInteractable.GetComponent<Rigidbody>();
         targetBody.velocity = m_Pose.GetVelocity();

@@ -18,6 +18,8 @@ https://assetstore.unity.com/packages/3d/characters/humanoids/modern-female-prof
 https://assetstore.unity.com/packages/3d/characters/mobile-character-44722
 https://assetstore.unity.com/packages/3d/characters/cyborg-character-112661
 https://assetstore.unity.com/packages/3d/props/interior/kitchen-props-free-80208
+https://assetstore.unity.com/packages/3d/props/industrial/pipes-kit-64170
+https://assetstore.unity.com/packages/3d/environments/industrial/equipment-for-industrial-or-sci-fi-building-82846
 
 https://www.toptal.com/designers/subtlepatterns/page/7/
 https://www.wildtextures.com/wp-content/uploads/wildtextures-seamless-checkerplate-metal-sheet.jpg
