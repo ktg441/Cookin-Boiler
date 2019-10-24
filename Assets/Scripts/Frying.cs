@@ -34,6 +34,10 @@ public class Frying : MonoBehaviour
             other.tag = "Untagged";
             other.transform.parent.SetParent(transform);
             attached = other.gameObject;
+            if (other.GetComponent<Interactable>().m_ActiveHand != null)
+            {
+                other.GetComponent<Interactable>().m_ActiveHand.syncList();
+            }
         }
     }
 }
