@@ -57,7 +57,7 @@ Lighting is completed <br />
 Cutting is still in progress <br />
 •	Summary of work done in the past week  
 1. Adding clutter to make kitchen feel populated
-2. Add humanoids into restaurant, might animate if there's timel ater
+2. Add humanoids into restaurant, might animate if there's time later
 3. Lighting
 4. Created scripts to summon utensils if you lose them
 5. Updated colliders and refactored entire project structure
@@ -67,3 +67,24 @@ Cutting is still in progress <br />
 	Add win conditions<br />
 	Model broken food<br />  
 	Add recipes to scene<br />
+
+# Week 4 Progress
+Project name <br />
+Cookin’ Boiler <br />
+List of mechanics with features completed, and still in progress <br />
+Scene is in completed <br />
+Lighting is completed <br />
+Cutting is completed <br />
+Boiling is completed <br />
+
+•	Summary of work done in the past week  
+1. Finished cutting
+2. Set up attaching food to various objects
+3. Finished cooking food in boiling water
+4. Win conditions
+
+•	Summary of work that will be done in the next week  
+	Import broken food models<br />
+	Script a win<br />
+	Add sounds effects (if time allows)<br />  
+	Build<br />
