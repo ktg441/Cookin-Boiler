@@ -29,20 +29,21 @@ public class Hand : MonoBehaviour
         // Down
         if(m_GrabAction.GetStateDown(m_Pose.inputSource))
         {
-            print(m_Pose.inputSource + " Trigger Down");
+            //print(m_Pose.inputSource + " Trigger Down");
             Pickup();
         }
 
         //Up
         if (m_GrabAction.GetStateUp(m_Pose.inputSource))
         {
-            print(m_Pose.inputSource + " Trigger Up");
+            //print(m_Pose.inputSource + " Trigger Up");
             Drop();
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        print("Tags " + other.name + " " + other.tag);
         if (!other.gameObject.CompareTag("Utensil") && !other.gameObject.CompareTag("Rack") && !other.gameObject.CompareTag("Food"))
             return;
 

@@ -26,8 +26,8 @@ public class Faucet : MonoBehaviour
     {
         if (other.CompareTag("GameController"))
         {
-            water.SetActive(state);
             state = !state;
+            water.SetActive(state);
         }
     }
 

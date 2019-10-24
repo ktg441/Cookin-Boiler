@@ -22,7 +22,9 @@ public class Water : MonoBehaviour
             water.SetActive(false);
             if (attached != null)
             {
-                attached.transform.SetParent(null);
+                attached.GetComponent<Rigidbody>().isKinematic = false;
+                attached.transform.parent.SetParent(GameObject.Find("Interactables").transform.parent);
+                attached.tag = "Food";
             }
         }
     }
@@ -33,11 +35,18 @@ public class Water : MonoBehaviour
         {
             water.SetActive(true);
         }
-        if (other.CompareTag("Food"))
+        if (other.CompareTag("Food") && water.activeInHierarchy)
         {
-            other.transform.SetParent(transform);
+            //print(other.name);
+            other.GetComponent<Rigidbody>().isKinematic = true;
+            if(other.GetComponent<Interactable>().m_ActiveHand)
+            {
+                other.GetComponent<Interactable>().m_ActiveHand.m_ContactInteractables.Remove(other.gameObject.GetComponent<Interactable>());
+                other.GetComponent<Interactable>().m_ActiveHand.Drop();          
+            }
+            other.tag = "Untagged";
+            other.transform.parent.SetParent(transform);
             attached = other.gameObject;
-            //other.transform.position = transform.position;
         }
     }
 
