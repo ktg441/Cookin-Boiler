@@ -39,11 +39,12 @@ public class Hand : MonoBehaviour
             //print(m_Pose.inputSource + " Trigger Up");
             Drop();
         }
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        print("Tags " + other.name + " " + other.tag);
+        //print("Tags " + other.name + " " + other.tag);
         if (!other.gameObject.CompareTag("Utensil") && !other.gameObject.CompareTag("Rack") && !other.gameObject.CompareTag("Food"))
             return;
 
@@ -102,6 +103,18 @@ public class Hand : MonoBehaviour
         else
         {
             m_ContactInteractables.Remove(other.gameObject.GetComponent<Interactable>());
+        }
+    }
+
+    public void syncList()
+    {
+        foreach (Interactable current in m_ContactInteractables.ToArray())
+        {
+            if (current.gameObject.tag.Equals("Untagged"))
+            {
+                Drop();
+                m_ContactInteractables.Remove(current);
+            }
         }
     }
 

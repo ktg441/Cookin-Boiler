@@ -8,7 +8,7 @@ public class Water : MonoBehaviour
     private GameObject attached;
 
     private bool heating;
-    private int start, end;
+    private float start, end;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +35,14 @@ public class Water : MonoBehaviour
 
         if (heating)
         {
-            start += (int)Time.deltaTime % 60;
+            if(start < 10f)
+            {
+                start += Time.deltaTime;
+                print("While heating" + start);
+                var block = new MaterialPropertyBlock();
+                block.SetColor("_BaseColor", Color.Lerp(Color.grey, Color.red, start/end));
+                transform.GetChild(0).GetChild(0).gameObject.GetComponent<Renderer>().SetPropertyBlock(block); //Change when I get real models in
+            }
         }
     }
 
@@ -51,21 +58,25 @@ public class Water : MonoBehaviour
             {
                 //print(other.name);
                 other.GetComponent<Rigidbody>().isKinematic = true;
-                if (other.GetComponent<Interactable>().m_ActiveHand)
-                {
-                    other.GetComponent<Interactable>().m_ActiveHand.m_ContactInteractables.Remove(other.gameObject.GetComponent<Interactable>());
-                    other.GetComponent<Interactable>().m_ActiveHand.Drop();
-                }
                 other.tag = "Untagged";
                 other.transform.parent.SetParent(transform);
                 attached = other.gameObject;
+                if (other.GetComponent<Interactable>().m_ActiveHand != null)
+                {
+                    other.GetComponent<Interactable>().m_ActiveHand.syncList();
+                }
             }
 
             if (other.CompareTag("Heat"))
             {
-                heating = true;
-                start = other.transform.parent.GetComponent<Properties>().getHeat();
-                end = other.transform.parent.GetComponent<Properties>().heatTime;
+                if (transform.childCount > 0)
+                {
+                    heating = true;
+                    start = transform.GetChild(0).gameObject.GetComponent<Properties>().getHeat();
+                    end = transform.GetChild(0).gameObject.GetComponent<Properties>().heatTime;
+                    print("Current start is : " + start);
+                }
+                
             }
         }
         
@@ -75,14 +86,18 @@ public class Water : MonoBehaviour
     {
         if (water.activeInHierarchy)
         {
-            if (other.CompareTag("Heat"))
+            
+        }
+        if (other.CompareTag("Heat"))
+        {
+            if (transform.childCount > 0)
             {
                 print("Current time: " + start);
                 heating = false;
-                other.transform.parent.GetComponent<Properties>().setHeat(start);
-                start = 0;
-                end = 0;
+                transform.GetChild(0).gameObject.GetComponent<Properties>().setHeat(start);
             }
+            start = 0;
+            end = 0;
         }
     }
 

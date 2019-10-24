@@ -31,11 +31,6 @@ public class Frying : MonoBehaviour
         {
             //print(other.name);
             other.GetComponent<Rigidbody>().isKinematic = true;
-            if (other.GetComponent<Interactable>().m_ActiveHand)
-            {
-                other.GetComponent<Interactable>().m_ActiveHand.m_ContactInteractables.Remove(other.gameObject.GetComponent<Interactable>());
-                other.GetComponent<Interactable>().m_ActiveHand.Drop();
-            }
             other.tag = "Untagged";
             other.transform.parent.SetParent(transform);
             attached = other.gameObject;
