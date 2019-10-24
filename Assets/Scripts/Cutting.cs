@@ -32,12 +32,15 @@ public class Cutting : MonoBehaviour
         print(numCuts);
         if (numCuts >= 5)
         {
-            print("Fully cut");
+            cutObject(transform.parent.gameObject);
         }
     }
 
-    void cutObject()
+    void cutObject(GameObject parent)
     {
-
+        Vector3 oldCoords = parent.GetComponent<Properties>().unfinished.transform.position;
+        parent.GetComponent<Properties>().unfinished.SetActive(false);
+        parent.GetComponent<Properties>().finished.transform.position = new Vector3(oldCoords.x, oldCoords.y + 0.05f, oldCoords.z);
+        parent.GetComponent<Properties>().finished.SetActive(true);
     }
 }

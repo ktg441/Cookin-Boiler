@@ -31,3 +31,4 @@ https://www.wildtextures.com/wp-content/uploads/wildtextures_seamless-styrofoam-
 https://www.youtube.com/watch?v=HnzmnSqE-Bc
 https://www.youtube.com/watch?v=ryfUXr5yvKw
 https://answers.unity.com/questions/1179131/how-do-i-display-text-with-countdown-timer-minutes.html
+https://docs.unity3d.com/ScriptReference/Transform-parent.html
