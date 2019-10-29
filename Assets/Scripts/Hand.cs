@@ -15,12 +15,14 @@ public class Hand : MonoBehaviour
 
     private bool handLock;
 
+    private int plateCount;
 
     private void Awake()
     {
         m_Pose = GetComponent<SteamVR_Behaviour_Pose>();
         m_Joint = GetComponent<FixedJoint>();
         handLock = false;
+        plateCount = 0;
     }
 
     // Update is called once per frame
@@ -68,6 +70,10 @@ public class Hand : MonoBehaviour
         {
             m_ContactInteractables.Add(GameObject.Find("User Pot").GetComponent<Interactable>());
         }
+        else if (other.name.Equals("plate-rack"))
+        {
+            m_ContactInteractables.Add(GameObject.Find("Dish" + plateCount).GetComponent<Interactable>());
+        }
         else
         {
             m_ContactInteractables.Add(other.gameObject.GetComponent<Interactable>());
@@ -99,6 +105,10 @@ public class Hand : MonoBehaviour
         else if (other.name.Equals("pot-rack"))
         {
             m_ContactInteractables.Remove(GameObject.Find("User Pot").GetComponent<Interactable>());
+        }
+        else if (other.name.Equals("plate-rack"))
+        {
+            m_ContactInteractables.Remove(GameObject.Find("Dish" + plateCount).GetComponent<Interactable>());
         }
         else
         {
@@ -175,6 +185,16 @@ public class Hand : MonoBehaviour
                 GameObject.Find("User Pot").transform.eulerAngles = new Vector3(-90f, m_CurrentInteractable.transform.eulerAngles.y, m_CurrentInteractable.transform.eulerAngles.z);
                 GameObject.Find("User Pot").transform.position = new Vector3(m_CurrentInteractable.transform.position.x , m_CurrentInteractable.transform.position.y - 0.05f, m_CurrentInteractable.transform.position.z);
                 handLock = true;
+            }
+        }
+        else if (m_CurrentInteractable.name.Contains("Dish"))
+        {
+            if (!handLock && plateCount < 5)
+            {
+                GameObject.Find("Dish" + plateCount).transform.eulerAngles = new Vector3(m_CurrentInteractable.transform.eulerAngles.x, m_CurrentInteractable.transform.eulerAngles.y, 0f);
+                GameObject.Find("Dish" + plateCount).transform.position = new Vector3(m_CurrentInteractable.transform.position.x, m_CurrentInteractable.transform.position.y, m_CurrentInteractable.transform.position.z);
+                handLock = true;
+                plateCount++;
             }
         }
 
