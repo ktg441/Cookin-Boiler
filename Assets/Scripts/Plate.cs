@@ -20,7 +20,7 @@ public class Plate : MonoBehaviour
         {
             if (attached.Count > 0)
             {
-                foreach (GameObject curr in attached)
+                foreach (GameObject curr in attached.ToArray())
                 {
                     curr.GetComponent<Rigidbody>().isKinematic = false;
                     curr.transform.parent.SetParent(GameObject.Find("Interactables").transform.parent);
@@ -35,7 +35,7 @@ public class Plate : MonoBehaviour
     {
         if (other.CompareTag("NoCollide"))
         {
-            Physics.IgnoreCollision(other, transform.parent.GetComponent<Collider>(), true);
+            Physics.IgnoreCollision(other, transform.parent.GetComponent<MeshCollider>(), true);
         }
         if (other.CompareTag("Food") && attached.Count < 10)
         {
@@ -44,6 +44,7 @@ public class Plate : MonoBehaviour
             other.tag = "Untagged";
             other.transform.parent.SetParent(transform);
             attached.Add(other.gameObject);
+            Physics.IgnoreCollision(other, transform.parent.GetComponent<MeshCollider>(), true);
             GameObject.Find("Controller (left)").GetComponent<Hand>().syncList();
             GameObject.Find("Controller (right)").GetComponent<Hand>().syncList();
             if (checkFullDish())
