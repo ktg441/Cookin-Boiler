@@ -102,8 +102,7 @@ public class Plate : MonoBehaviour
         print("food5 " + food5);
         print("food6 " + food6);
 
-        //if (food1 && food2 && food3 && food4 && food5 && food6)
-        if (food4)
+        if (food1 && food2 && food3 && food4 && food5 && food6)
         {
             return true;
         }
@@ -115,7 +114,9 @@ public class Plate : MonoBehaviour
     {
         Vector3 oldCoords = parent.GetComponent<Properties>().unfinished.transform.position;
         parent.GetComponent<Properties>().unfinished.SetActive(false);
-        parent.GetComponent<Properties>().finished.transform.position = new Vector3(oldCoords.x, oldCoords.y + 0.07f, oldCoords.z);
+        parent.GetComponent<Properties>().finished.transform.position = new Vector3(oldCoords.x, oldCoords.y + 0.03f, oldCoords.z);
         parent.GetComponent<Properties>().finished.SetActive(true);
+        GameObject.Find("Controller (left)").GetComponent<Hand>().removeInactives();
+        GameObject.Find("Controller (right)").GetComponent<Hand>().removeInactives();
     }
 }

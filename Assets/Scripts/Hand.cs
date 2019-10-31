@@ -300,6 +300,13 @@ public class Hand : MonoBehaviour
                 handLock = true;
             }
         }
+        else if (m_CurrentInteractable.name.Equals("Finished Food"))
+        {
+            if (!handLock)
+            {
+                GameObject.Find("Finished Food").transform.position = new Vector3(m_CurrentInteractable.transform.position.x, m_CurrentInteractable.transform.position.y + 0.1f, m_CurrentInteractable.transform.position.z);
+            }
+        }
 
 
         // Attach
