@@ -48,6 +48,10 @@ public class Water : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("NoCollide"))
+        {
+            Physics.IgnoreCollision(other, transform.parent.GetComponent<Collider>(), true);
+        }
         if (other.name.Equals("Running Water"))
         {
             water.SetActive(true);
@@ -56,11 +60,13 @@ public class Water : MonoBehaviour
         {
             if (other.CompareTag("Food"))
             {
+                
                 //print(other.name);
                 other.GetComponent<Rigidbody>().isKinematic = true;
                 other.tag = "Untagged";
                 other.transform.parent.SetParent(transform);
                 attached = other.gameObject;
+                Physics.IgnoreCollision(other, transform.parent.GetComponent<Collider>(), true);
                 /*if (other.GetComponent<Interactable>().m_ActiveHand != null)
                 {
                     other.GetComponent<Interactable>().m_ActiveHand.syncList();

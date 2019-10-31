@@ -5,7 +5,7 @@ using UnityEngine;
 public class Plate : MonoBehaviour
 {
 
-    private List<GameObject> attached;
+    public List<GameObject> attached;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +33,10 @@ public class Plate : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("NoCollide"))
+        {
+            Physics.IgnoreCollision(other, transform.parent.GetComponent<Collider>(), true);
+        }
         if (other.CompareTag("Food") && attached.Count < 10)
         {
             //print(other.name);
@@ -44,7 +48,7 @@ public class Plate : MonoBehaviour
             GameObject.Find("Controller (right)").GetComponent<Hand>().syncList();
             if (checkFullDish())
             {
-                completeDish(transform.parent.gameObject);
+                completeDish(transform.parent.parent.gameObject);
             }
         }
 
@@ -61,23 +65,23 @@ public class Plate : MonoBehaviour
         food1 = food2 = food3 = food4 = food5 = food6 = false;
         foreach (GameObject curr in attached)
         {
-            if (curr.name.Contains("Onion"))
+            if (curr.transform.parent.name.Contains("Onion"))
             {
                 food1 = true;
             }
-            else if (curr.name.Contains("Zucchini"))
+            else if (curr.transform.parent.name.Contains("Zucchini"))
             {
                 food2 = true;
             }
-            else if (curr.name.Contains("Garlic"))
+            else if (curr.transform.parent.name.Contains("Garlic"))
             {
                 food3 = true;
             }
-            else if (curr.name.Contains("Corn"))
+            else if (curr.transform.parent.name.Contains("Corn"))
             {
                 food4 = true;
             }
-            else if (curr.name.Contains("Carrot"))
+            else if (curr.transform.parent.name.Contains("Carrot"))
             {
                 if (food5)
                 {
@@ -97,7 +101,8 @@ public class Plate : MonoBehaviour
         print("food5 " + food5);
         print("food6 " + food6);
 
-        if (food1 && food2 && food3 && food4 && food5 && food6)
+        //if (food1 && food2 && food3 && food4 && food5 && food6)
+        if (food1 && food2 && food3)
         {
             return true;
         }
@@ -109,7 +114,7 @@ public class Plate : MonoBehaviour
     {
         Vector3 oldCoords = parent.GetComponent<Properties>().unfinished.transform.position;
         parent.GetComponent<Properties>().unfinished.SetActive(false);
-        parent.GetComponent<Properties>().finished.transform.position = new Vector3(oldCoords.x, oldCoords.y + 0.05f, oldCoords.z);
+        parent.GetComponent<Properties>().finished.transform.position = new Vector3(oldCoords.x, oldCoords.y + 0.07f, oldCoords.z);
         parent.GetComponent<Properties>().finished.SetActive(true);
     }
 }

@@ -11,6 +11,7 @@ TagManager:
   - Rack
   - Food
   - Heat
+  - NoCollide
   layers:
   - Default
   - TransparentFX

@@ -19,9 +19,15 @@ public class Hand : MonoBehaviour
     private GameObject parents = null;
     public GameObject onionPrefab = null;
     public GameObject garlicPrefab = null;
+    public GameObject zucchiniPrefab = null;
 
     private int nextOnion;
     private int nextGarlic;
+    private int nextZucch;
+
+    private bool isOnion;
+    private bool isGarlic;
+    private bool isZucchini;
 
     private void Awake()
     {
@@ -29,9 +35,13 @@ public class Hand : MonoBehaviour
         m_Joint = GetComponent<FixedJoint>();
         handLock = false;
         fake = GameObject.Find("Fake");
+        isOnion = false;
+        isGarlic = false;
+        isZucchini = false;
         parents = GameObject.Find("FoodInstantiate");
         nextOnion = 0;
         nextGarlic = 0;
+        nextZucch = 0;
     }
 
     // Update is called once per frame
@@ -83,8 +93,20 @@ public class Hand : MonoBehaviour
         {
             m_ContactInteractables.Add(GameObject.Find("Dish").transform.GetChild(0).GetComponent<Interactable>());
         }
-        else if (other.name.Equals("onion-rack"))
+        else if (other.name.Equals("onion-rack") || other.name.Equals("garlic-rack") || other.name.Equals("zucchini-rack"))
         {
+            switch(other.name)
+            {
+                case "onion-rack":
+                    isOnion = true;
+                    break;
+                case "garlic-rack":
+                    isGarlic = true;
+                    break;
+                case "zucchini-rack":
+                    isZucchini = true;
+                    break;
+            }
             m_ContactInteractables.Add(fake.GetComponent<Interactable>());
         }
         else
@@ -123,7 +145,7 @@ public class Hand : MonoBehaviour
         {
             m_ContactInteractables.Remove(GameObject.Find("Dish").transform.GetChild(0).GetComponent<Interactable>());
         }
-        else if (other.name.Equals("onion-rack"))
+        else if (other.name.Equals("onion-rack") || other.name.Equals("garlic-rack") || other.name.Equals("zucchini-rack"))
         {
             m_ContactInteractables.Remove(fake.GetComponent<Interactable>());
         }
@@ -174,11 +196,33 @@ public class Hand : MonoBehaviour
             print("It's fake");
             if (!handLock)
             {
-                GameObject newOnion = Instantiate(onionPrefab, new Vector3(0, 0, 0), Quaternion.identity).gameObject;
-                newOnion.name = newOnion.name + " " + nextOnion;
-                nextOnion++;
-                newOnion.transform.SetParent(parents.transform);
-                m_CurrentInteractable = newOnion.transform.GetChild(0).GetComponent<Interactable>();
+                if (isOnion)
+                {
+                    GameObject newOnion = Instantiate(onionPrefab, new Vector3(0, 0, 0), Quaternion.identity).gameObject;
+                    newOnion.name = newOnion.name + " " + nextOnion;
+                    nextOnion++;
+                    newOnion.transform.SetParent(parents.transform);
+                    m_CurrentInteractable = newOnion.transform.GetChild(0).GetComponent<Interactable>();
+                    isOnion = false;
+                }
+                else if (isGarlic)
+                {
+                    GameObject newGarlic = Instantiate(garlicPrefab, new Vector3(0, 0, 0), Quaternion.identity).gameObject;
+                    newGarlic.name = newGarlic.name + " " + nextGarlic;
+                    nextGarlic++;
+                    newGarlic.transform.SetParent(parents.transform);
+                    m_CurrentInteractable = newGarlic.transform.GetChild(0).GetComponent<Interactable>();
+                    isGarlic = false;
+                }
+                else if (isZucchini)
+                {
+                    GameObject newZucchini = Instantiate(zucchiniPrefab, new Vector3(0, 0, 0), Quaternion.identity).gameObject;
+                    newZucchini.name = newZucchini.name + " " + nextZucch;
+                    nextZucch++;
+                    newZucchini.transform.SetParent(parents.transform);
+                    m_CurrentInteractable = newZucchini.transform.GetChild(0).GetComponent<Interactable>();
+                    isZucchini = false;
+                }
                 //newOnion.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
                 handLock = true;
             }
@@ -186,7 +230,6 @@ public class Hand : MonoBehaviour
 
         //Position
         m_CurrentInteractable.transform.position = transform.position;
-
         if (m_CurrentInteractable.name.Equals("User Knife"))
         {
             if (!handLock)
@@ -255,7 +298,6 @@ public class Hand : MonoBehaviour
         //Null check
         if (!m_CurrentInteractable)
             return;
-
         handLock = false;
         //Apply velocity
         Rigidbody targetBody = m_CurrentInteractable.GetComponent<Rigidbody>();

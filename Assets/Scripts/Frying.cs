@@ -51,13 +51,19 @@ public class Frying : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("NoCollide"))
+        {
+            Physics.IgnoreCollision(other, transform.parent.GetComponent<Collider>(), true);
+        }
         if (other.CompareTag("Food"))
         {
             //print(other.name);
+            
             other.GetComponent<Rigidbody>().isKinematic = true;
             other.tag = "Untagged";
             other.transform.parent.SetParent(transform);
             attached = other.gameObject;
+            Physics.IgnoreCollision(other, transform.parent.GetComponent<Collider>(), true);
             GameObject.Find("Controller (left)").GetComponent<Hand>().syncList();
             GameObject.Find("Controller (right)").GetComponent<Hand>().syncList();
         }
@@ -74,6 +80,7 @@ public class Frying : MonoBehaviour
         }
         if (other.name.Equals("User Spoon"))
         {
+            Physics.IgnoreCollision(other, transform.parent.GetComponent<Collider>(), true);
             stirring = true;
         }
 
