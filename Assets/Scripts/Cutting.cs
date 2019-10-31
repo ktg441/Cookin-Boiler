@@ -44,6 +44,7 @@ public class Cutting : MonoBehaviour
         parent.GetComponent<Properties>().finished.SetActive(true);
         GameObject.Find("Controller (left)").GetComponent<Hand>().removeInactives();
         GameObject.Find("Controller (right)").GetComponent<Hand>().removeInactives();
+        GameObject.Find("Score").GetComponent<Score>().AddScore(20);
 
     }
 }

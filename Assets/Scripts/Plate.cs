@@ -47,6 +47,7 @@ public class Plate : MonoBehaviour
             Physics.IgnoreCollision(other, transform.parent.GetComponent<MeshCollider>(), true);
             GameObject.Find("Controller (left)").GetComponent<Hand>().syncList();
             GameObject.Find("Controller (right)").GetComponent<Hand>().syncList();
+            GameObject.Find("Score").GetComponent<Score>().AddScore(attached.Count * 50);
             if (checkFullDish())
             {
                 completeDish(transform.parent.parent.gameObject);
@@ -118,5 +119,6 @@ public class Plate : MonoBehaviour
         parent.GetComponent<Properties>().finished.SetActive(true);
         GameObject.Find("Controller (left)").GetComponent<Hand>().removeInactives();
         GameObject.Find("Controller (right)").GetComponent<Hand>().removeInactives();
+        GameObject.Find("Score").GetComponent<Score>().AddScore(500);
     }
 }

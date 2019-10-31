@@ -109,6 +109,7 @@ public class Water : MonoBehaviour
                 print("Current time: " + start);
                 heating = false;
                 transform.GetChild(0).gameObject.GetComponent<Properties>().setHeat(start);
+                GameObject.Find("Score").GetComponent<Score>().AddScore((int)start * 5);
             }
             start = 0;
             end = 0;
