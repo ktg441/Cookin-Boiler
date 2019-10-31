@@ -66,15 +66,15 @@ public class Plate : MonoBehaviour
         food1 = food2 = food3 = food4 = food5 = food6 = false;
         foreach (GameObject curr in attached)
         {
-            if (curr.transform.parent.name.Contains("Onion"))
+            if (curr.transform.parent.name.Contains("Onion") && (curr.transform.parent.GetComponent<Properties>().getHeat() > curr.transform.parent.GetComponent<Properties>().heatTime))
             {
                 food1 = true;
             }
-            else if (curr.transform.parent.name.Contains("Zucchini"))
+            else if (curr.transform.parent.name.Contains("Zucchini") && (curr.transform.parent.GetComponent<Properties>().getHeat() > curr.transform.parent.GetComponent<Properties>().heatTime))
             {
                 food2 = true;
             }
-            else if (curr.transform.parent.name.Contains("Garlic"))
+            else if (curr.transform.parent.name.Contains("Garlic") && (curr.transform.parent.GetComponent<Properties>().getHeat() > curr.transform.parent.GetComponent<Properties>().heatTime))
             {
                 food3 = true;
             }
