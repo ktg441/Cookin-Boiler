@@ -35,6 +35,7 @@ public class End : MonoBehaviour
             {
                 e.SetActive(false);
             }
+            GameObject.Find("Timer").SetActive(false);
         }
     }
 }
