@@ -18,7 +18,7 @@ public class Trash : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name.Contains("Clone"))
+        if (other.gameObject.transform.parent.name.Contains("Clone"))
         {
             Destroy(other.gameObject);
         }
