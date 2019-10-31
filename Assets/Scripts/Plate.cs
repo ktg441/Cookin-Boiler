@@ -16,7 +16,7 @@ public class Plate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.eulerAngles.x > 45 && transform.eulerAngles.x < 135)
+        if (transform.eulerAngles.z > 45 && transform.eulerAngles.z < 135)
         {
             if (attached.Count > 0)
             {
@@ -66,23 +66,23 @@ public class Plate : MonoBehaviour
         food1 = food2 = food3 = food4 = food5 = food6 = false;
         foreach (GameObject curr in attached)
         {
-            if (curr.transform.parent.name.Contains("Onion") && (curr.transform.parent.GetComponent<Properties>().getHeat() > curr.transform.parent.GetComponent<Properties>().heatTime))
+            if (curr.transform.parent.name.Contains("Onion") && (curr.transform.parent.GetComponent<Properties>().getHeat() >= curr.transform.parent.GetComponent<Properties>().heatTime))
             {
                 food1 = true;
             }
-            else if (curr.transform.parent.name.Contains("Zucchini") && (curr.transform.parent.GetComponent<Properties>().getHeat() > curr.transform.parent.GetComponent<Properties>().heatTime))
+            else if (curr.transform.parent.name.Contains("Zucchini") && (curr.transform.parent.GetComponent<Properties>().getHeat() >= curr.transform.parent.GetComponent<Properties>().heatTime))
             {
                 food2 = true;
             }
-            else if (curr.transform.parent.name.Contains("Garlic") && (curr.transform.parent.GetComponent<Properties>().getHeat() > curr.transform.parent.GetComponent<Properties>().heatTime))
+            else if (curr.transform.parent.name.Contains("Garlic") && (curr.transform.parent.GetComponent<Properties>().getHeat() >= curr.transform.parent.GetComponent<Properties>().heatTime))
             {
                 food3 = true;
             }
-            else if (curr.transform.parent.name.Contains("Corn") && (curr.transform.parent.GetComponent<Properties>().getHeat() > curr.transform.parent.GetComponent<Properties>().heatTime))
+            else if (curr.transform.parent.name.Contains("Corn") && (curr.transform.parent.GetComponent<Properties>().getHeat() >= curr.transform.parent.GetComponent<Properties>().heatTime))
             {
                 food4 = true;
             }
-            else if (curr.transform.parent.name.Contains("Carrot"))
+            else if (curr.transform.parent.name.Contains("Carrot") && (curr.transform.parent.GetComponent<Properties>().getHeat() >= curr.transform.parent.GetComponent<Properties>().heatTime))
             {
                 if (food5)
                 {

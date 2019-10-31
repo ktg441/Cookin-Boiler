@@ -8,7 +8,7 @@ public class Properties : MonoBehaviour
     public GameObject finished;
 
     public float heatTime;
-    private float heated;
+    public float heated;
     // Start is called before the first frame update
     void Start()
     {

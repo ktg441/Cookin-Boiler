@@ -7,7 +7,7 @@ public class Water : MonoBehaviour
     private GameObject water;
     private GameObject attached;
 
-    private bool heating;
+    private bool heating, stirring;
     private float start, end;
     // Start is called before the first frame update
     void Start()
@@ -16,6 +16,7 @@ public class Water : MonoBehaviour
         water.SetActive(false);
         attached = null;
         heating = false;
+        stirring = false;
         start = end = 0;
     }
 
@@ -35,7 +36,7 @@ public class Water : MonoBehaviour
 
         if (heating)
         {
-            if(start < 10f)
+            if(start < 10f && stirring)
             {
                 start += Time.deltaTime;
                 print("While heating" + start);
@@ -86,6 +87,11 @@ public class Water : MonoBehaviour
                 }
                 
             }
+            if (other.name.Equals("User Ladle"))
+            {
+                Physics.IgnoreCollision(other, transform.parent.GetComponent<Collider>(), true);
+                stirring = true;
+            }
         }
         
     }
@@ -106,6 +112,10 @@ public class Water : MonoBehaviour
             }
             start = 0;
             end = 0;
+        }
+        if (other.name.Equals("User Ladle"))
+        {
+            stirring = false;
         }
     }
 
