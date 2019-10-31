@@ -18,8 +18,10 @@ public class Hand : MonoBehaviour
     private GameObject fake = null;
     private GameObject parents = null;
     public GameObject onionPrefab = null;
+    public GameObject garlicPrefab = null;
 
     private int nextOnion;
+    private int nextGarlic;
 
     private void Awake()
     {
@@ -29,6 +31,7 @@ public class Hand : MonoBehaviour
         fake = GameObject.Find("Fake");
         parents = GameObject.Find("FoodInstantiate");
         nextOnion = 0;
+        nextGarlic = 0;
     }
 
     // Update is called once per frame
