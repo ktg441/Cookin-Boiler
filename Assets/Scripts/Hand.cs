@@ -15,11 +15,17 @@ public class Hand : MonoBehaviour
 
     private bool handLock;
 
+    private GameObject fake = null;
+    private GameObject parents = null;
+    public GameObject onionPrefab = null;
+
     private void Awake()
     {
         m_Pose = GetComponent<SteamVR_Behaviour_Pose>();
         m_Joint = GetComponent<FixedJoint>();
         handLock = false;
+        fake = GameObject.Find("Fake");
+        parents = GameObject.Find("FoodInstantiate");
     }
 
     // Update is called once per frame
@@ -71,6 +77,10 @@ public class Hand : MonoBehaviour
         {
             m_ContactInteractables.Add(GameObject.Find("Dish").transform.GetChild(0).GetComponent<Interactable>());
         }
+        else if (other.name.Equals("onion-rack"))
+        {
+            m_ContactInteractables.Add(fake.GetComponent<Interactable>());
+        }
         else
         {
             m_ContactInteractables.Add(other.gameObject.GetComponent<Interactable>());
@@ -106,6 +116,10 @@ public class Hand : MonoBehaviour
         else if (other.name.Equals("plate-rack"))
         {
             m_ContactInteractables.Remove(GameObject.Find("Dish").transform.GetChild(0).GetComponent<Interactable>());
+        }
+        else if (other.name.Equals("onion-rack"))
+        {
+            m_ContactInteractables.Remove(fake.GetComponent<Interactable>());
         }
         else
         {
@@ -148,6 +162,19 @@ public class Hand : MonoBehaviour
         //Already held, check
         if (m_CurrentInteractable.m_ActiveHand)
             m_CurrentInteractable.m_ActiveHand.Drop();
+
+        if (m_CurrentInteractable.name.Equals("Fake"))
+        {
+            print("It's fake");
+            if (!handLock)
+            {
+                GameObject newOnion = Instantiate(onionPrefab, new Vector3(0, 0, 0), Quaternion.identity).gameObject;
+                newOnion.transform.SetParent(parents.transform);
+                m_CurrentInteractable = newOnion.transform.GetChild(0).GetComponent<Interactable>();
+                //newOnion.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
+                handLock = true;
+            }
+        }
 
         //Position
         m_CurrentInteractable.transform.position = transform.position;
@@ -202,6 +229,7 @@ public class Hand : MonoBehaviour
                 GameObject parentDish = GameObject.Find("Dish").transform.GetChild(0).gameObject.activeInHierarchy ? GameObject.Find("Dish").transform.GetChild(0).gameObject : GameObject.Find("Dish").transform.GetChild(1).gameObject;
                 parentDish.transform.eulerAngles = new Vector3(m_CurrentInteractable.transform.eulerAngles.x, m_CurrentInteractable.transform.eulerAngles.y, 0f);
                 parentDish.transform.position = new Vector3(m_CurrentInteractable.transform.position.x, m_CurrentInteractable.transform.position.y, m_CurrentInteractable.transform.position.z);
+                handLock = true;
             }
         }
 
