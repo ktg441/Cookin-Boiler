@@ -5,7 +5,7 @@
       "app_key": "application.generated.unity.cookingustavo.exe",
       "launch_type": "url",
       "url": "steam://launch/",
-      "action_manifest_path": "W:\\CS 390\\Final Project\\Cookin-Boiler\\actions.json",
+      "action_manifest_path": "C:\\Users\\payne77\\VR\\Cookin-Boiler\\actions.json",
       "strings": {
         "en_us": {
           "name": "Cookin' Gustavo [Testing]"
