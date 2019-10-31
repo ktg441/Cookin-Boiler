@@ -83,7 +83,7 @@ public class Hand : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //print("Tags " + other.name + " " + other.tag);
-        if (!other.gameObject.CompareTag("Utensil") && !other.gameObject.CompareTag("Rack") && !other.gameObject.CompareTag("Food"))
+        if (!other.gameObject.CompareTag("Utensil") && !other.gameObject.CompareTag("Rack") && !other.gameObject.CompareTag("Food") && !other.gameObject.CompareTag("Paper"))
             return;
 
         if(other.name.Equals("knife-rack"))
@@ -140,7 +140,7 @@ public class Hand : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
 
-        if (!other.gameObject.CompareTag("Utensil") && !other.gameObject.CompareTag("Rack") && !other.gameObject.CompareTag("Food"))
+        if (!other.gameObject.CompareTag("Utensil") && !other.gameObject.CompareTag("Rack") && !other.gameObject.CompareTag("Food") && !other.gameObject.CompareTag("Paper"))
             return;
 
         if (other.name.Equals("knife-rack"))
