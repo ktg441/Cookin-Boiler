@@ -40,10 +40,8 @@ public class Plate : MonoBehaviour
             other.tag = "Untagged";
             other.transform.parent.SetParent(transform);
             attached.Add(other.gameObject);
-            if (other.GetComponent<Interactable>().m_ActiveHand != null)
-            {
-                other.GetComponent<Interactable>().m_ActiveHand.syncList();
-            }
+            GameObject.Find("Controller (left)").GetComponent<Hand>().syncList();
+            GameObject.Find("Controller (right)").GetComponent<Hand>().syncList();
             if (checkFullDish())
             {
                 completeDish(transform.parent.gameObject);
@@ -59,17 +57,47 @@ public class Plate : MonoBehaviour
 
     private bool checkFullDish()
     {
-        bool food1, food2, food3, food4; //List of ingredients
-        food1 = food2 = food3 = food4 = false;
+        bool food1, food2, food3, food4, food5, food6; //List of ingredients
+        food1 = food2 = food3 = food4 = food5 = food6 = false;
         foreach (GameObject curr in attached)
         {
-            if (curr.name.Equals(""))
+            if (curr.name.Contains("Onion"))
             {
-                //Set trues
+                food1 = true;
+            }
+            else if (curr.name.Contains("Zucchini"))
+            {
+                food2 = true;
+            }
+            else if (curr.name.Contains("Garlic"))
+            {
+                food3 = true;
+            }
+            else if (curr.name.Contains("Corn"))
+            {
+                food4 = true;
+            }
+            else if (curr.name.Contains("Carrot"))
+            {
+                if (food5)
+                {
+                    food6 = true;
+                }
+                else
+                {
+                    food5 = true;
+                }
             }
         }
 
-        if(food1 && food2 && food3 && food4)
+        print("food1 " + food1);
+        print("food2 " + food2);
+        print("food3 " + food3);
+        print("food4 " + food4);
+        print("food5 " + food5);
+        print("food6 " + food6);
+
+        if (food1 && food2 && food3 && food4 && food5 && food6)
         {
             return true;
         }

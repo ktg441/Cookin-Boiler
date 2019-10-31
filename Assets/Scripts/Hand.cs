@@ -19,6 +19,8 @@ public class Hand : MonoBehaviour
     private GameObject parents = null;
     public GameObject onionPrefab = null;
 
+    private int nextOnion;
+
     private void Awake()
     {
         m_Pose = GetComponent<SteamVR_Behaviour_Pose>();
@@ -26,6 +28,7 @@ public class Hand : MonoBehaviour
         handLock = false;
         fake = GameObject.Find("Fake");
         parents = GameObject.Find("FoodInstantiate");
+        nextOnion = 0;
     }
 
     // Update is called once per frame
@@ -169,6 +172,8 @@ public class Hand : MonoBehaviour
             if (!handLock)
             {
                 GameObject newOnion = Instantiate(onionPrefab, new Vector3(0, 0, 0), Quaternion.identity).gameObject;
+                newOnion.name = newOnion.name + " " + nextOnion;
+                nextOnion++;
                 newOnion.transform.SetParent(parents.transform);
                 m_CurrentInteractable = newOnion.transform.GetChild(0).GetComponent<Interactable>();
                 //newOnion.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);

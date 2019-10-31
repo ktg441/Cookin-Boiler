@@ -22,6 +22,7 @@ https://assetstore.unity.com/packages/3d/props/industrial/pipes-kit-64170
 https://assetstore.unity.com/packages/3d/environments/industrial/equipment-for-industrial-or-sci-fi-building-82846
 https://assetstore.unity.com/packages/2d/textures-materials/water/stylize-water-texture-153577
 https://assetstore.unity.com/packages/3d/props/food/free-4k-scanned-vegetables-minipack-135434
+https://assetstore.unity.com/packages/3d/vegetation/plants/cartoon-farm-crops-79777
 
 https://www.toptal.com/designers/subtlepatterns/page/7/
 https://www.wildtextures.com/wp-content/uploads/wildtextures-seamless-checkerplate-metal-sheet.jpg
@@ -33,3 +34,6 @@ https://www.youtube.com/watch?v=HnzmnSqE-Bc
 https://www.youtube.com/watch?v=ryfUXr5yvKw
 https://answers.unity.com/questions/1179131/how-do-i-display-text-with-countdown-timer-minutes.html
 https://docs.unity3d.com/ScriptReference/Transform-parent.html
+https://answers.unity.com/questions/190844/unique-names-for-instantiated-prefabs.html
+https://forum.unity.com/threads/change-color-of-all-children.402297/
+https://docs.unity3d.com/Manual/InstantiatingPrefabs.html
