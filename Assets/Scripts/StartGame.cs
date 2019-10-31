@@ -6,6 +6,8 @@ public class StartGame : MonoBehaviour
 
     private Text start_text;
     private Text timer;
+    private GameObject[] racks;
+    private GameObject[] racku;
 
     private void Start()
     {
@@ -13,6 +15,18 @@ public class StartGame : MonoBehaviour
         timer = GameObject.Find("Timer").GetComponent<Text>();
         timer.enabled = false;
         timer.GetComponent<Timer>().enabled = false;
+        racks = GameObject.FindGameObjectsWithTag("Rack");
+        racku = GameObject.FindGameObjectsWithTag("Rack_Utensil");
+        foreach (GameObject e in racks)
+        {
+            e.SetActive(false);
+            
+        }
+        foreach (GameObject e in racku)
+        {
+            e.SetActive(false);
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -36,5 +50,15 @@ public class StartGame : MonoBehaviour
         start_text.enabled = false;
         timer.enabled = true;
         timer.GetComponent<Timer>().enabled = true;
+
+        foreach (GameObject e in racks)
+        {
+            e.SetActive(true);
+        }
+        foreach (GameObject e in racku)
+        {
+            e.SetActive(true);
+        }
+
     }
 }
