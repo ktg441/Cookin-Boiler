@@ -61,10 +61,12 @@ public class Water : MonoBehaviour
                 other.tag = "Untagged";
                 other.transform.parent.SetParent(transform);
                 attached = other.gameObject;
-                if (other.GetComponent<Interactable>().m_ActiveHand != null)
+                /*if (other.GetComponent<Interactable>().m_ActiveHand != null)
                 {
                     other.GetComponent<Interactable>().m_ActiveHand.syncList();
-                }
+                } */
+                GameObject.Find("Controller (left)").GetComponent<Hand>().syncList();
+                GameObject.Find("Controller (right)").GetComponent<Hand>().syncList();
             }
 
             if (other.CompareTag("Heat"))

@@ -125,6 +125,17 @@ public class Hand : MonoBehaviour
         }
     }
 
+    public void removeInactives()
+    {
+        foreach (Interactable current in m_ContactInteractables.ToArray())
+        {
+            if (current.gameObject.activeInHierarchy == false)
+            {
+                m_ContactInteractables.Remove(current);
+            }
+        }
+    }
+
     public void Pickup()
     {
         //Get nearest interactable
