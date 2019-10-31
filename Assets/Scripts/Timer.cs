@@ -9,6 +9,9 @@ public class Timer : MonoBehaviour
     private Text m_text;
     private float m_leftTime;
 
+    private GameObject[] racks;
+    private GameObject[] racku;
+
     private void Awake()
     {
         m_text = GetComponent<Text>();
@@ -33,6 +36,17 @@ public class Timer : MonoBehaviour
             {
                 //  The countdown clock has finished
                 m_text.text = "Time : 0:00";
+                racks = GameObject.FindGameObjectsWithTag("Rack");
+                racku = GameObject.FindGameObjectsWithTag("Rack_Utensil");
+                foreach (GameObject e in racks)
+                {
+                    e.SetActive(false);
+
+                }
+                foreach (GameObject e in racku)
+                {
+                    e.SetActive(false);
+                }
             }
         }
     }
