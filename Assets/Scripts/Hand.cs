@@ -20,14 +20,17 @@ public class Hand : MonoBehaviour
     public GameObject onionPrefab = null;
     public GameObject garlicPrefab = null;
     public GameObject zucchiniPrefab = null;
+    public GameObject cornPrefab = null;
 
     private int nextOnion;
     private int nextGarlic;
     private int nextZucch;
+    private int nextCorn;
 
     private bool isOnion;
     private bool isGarlic;
     private bool isZucchini;
+    private bool isCorn;
 
     private void Awake()
     {
@@ -38,10 +41,12 @@ public class Hand : MonoBehaviour
         isOnion = false;
         isGarlic = false;
         isZucchini = false;
+        isCorn = false;
         parents = GameObject.Find("FoodInstantiate");
         nextOnion = 0;
         nextGarlic = 0;
         nextZucch = 0;
+        nextCorn = 0;
     }
 
     // Update is called once per frame
@@ -93,7 +98,7 @@ public class Hand : MonoBehaviour
         {
             m_ContactInteractables.Add(GameObject.Find("Dish").transform.GetChild(0).GetComponent<Interactable>());
         }
-        else if (other.name.Equals("onion-rack") || other.name.Equals("garlic-rack") || other.name.Equals("zucchini-rack"))
+        else if (other.name.Equals("onion-rack") || other.name.Equals("garlic-rack") || other.name.Equals("zucchini-rack") || other.name.Equals("corn-rack"))
         {
             switch(other.name)
             {
@@ -105,6 +110,9 @@ public class Hand : MonoBehaviour
                     break;
                 case "zucchini-rack":
                     isZucchini = true;
+                    break;
+                case "corn-rack":
+                    isCorn = true;
                     break;
             }
             m_ContactInteractables.Add(fake.GetComponent<Interactable>());
@@ -145,7 +153,7 @@ public class Hand : MonoBehaviour
         {
             m_ContactInteractables.Remove(GameObject.Find("Dish").transform.GetChild(0).GetComponent<Interactable>());
         }
-        else if (other.name.Equals("onion-rack") || other.name.Equals("garlic-rack") || other.name.Equals("zucchini-rack"))
+        else if (other.name.Equals("onion-rack") || other.name.Equals("garlic-rack") || other.name.Equals("zucchini-rack") || other.name.Equals("corn-rack"))
         {
             m_ContactInteractables.Remove(fake.GetComponent<Interactable>());
         }
@@ -222,6 +230,15 @@ public class Hand : MonoBehaviour
                     newZucchini.transform.SetParent(parents.transform);
                     m_CurrentInteractable = newZucchini.transform.GetChild(0).GetComponent<Interactable>();
                     isZucchini = false;
+                }
+                else if (isCorn)
+                {
+                    GameObject newCorn = Instantiate(cornPrefab, new Vector3(0, 0, 0), Quaternion.identity).gameObject;
+                    newCorn.name = newCorn.name + " " + nextCorn;
+                    nextCorn++;
+                    newCorn.transform.SetParent(parents.transform);
+                    m_CurrentInteractable = newCorn.transform.GetChild(0).GetComponent<Interactable>();
+                    isCorn = false;
                 }
                 //newOnion.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z);
                 handLock = true;

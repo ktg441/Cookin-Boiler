@@ -78,7 +78,7 @@ public class Plate : MonoBehaviour
             {
                 food3 = true;
             }
-            else if (curr.transform.parent.name.Contains("Corn"))
+            else if (curr.transform.parent.name.Contains("Corn") && (curr.transform.parent.GetComponent<Properties>().getHeat() > curr.transform.parent.GetComponent<Properties>().heatTime))
             {
                 food4 = true;
             }
@@ -103,7 +103,7 @@ public class Plate : MonoBehaviour
         print("food6 " + food6);
 
         //if (food1 && food2 && food3 && food4 && food5 && food6)
-        if (food1 && food2 && food3)
+        if (food4)
         {
             return true;
         }
